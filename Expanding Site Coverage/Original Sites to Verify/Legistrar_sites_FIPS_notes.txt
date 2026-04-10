@@ -1,0 +1,76 @@
+======================================================================
+Legistrar_sites — FIPS Population Notes
+Generated 2026-03-18
+======================================================================
+
+WORKFLOW — Legistrar_sites
+---------------------------
+1. Filter rows where aw_active = 'yes' AND state is a US state abbreviation.
+2. gov_level: derived from site_type column using the mapping:
+     county / judicial county        → 'county'
+     municipality / borough / parish → 'municipality'
+     county and municipal            → 'municipality & county'
+     all other types                 → 'other'
+3. state_fips: same hardcoded map as AW file.
+4. county_fips: same Census lookup strategy as AW file (county→national_county.txt,
+   municipality/other→place-county crosswalk), with manual overrides applied first.
+
+DATA SOURCES  (same as AW file above)
+
+
+TOTAL CELLS UPDATED: 288
+
+────────────────────────────────────────────────────────────
+EDGE CASES
+────────────────────────────────────────────────────────────
+  [AK] 'Kenai Peninsula Borough': gov_level=county, county_fips=02122 — manual override
+  [AK] 'Matanusk-Susitna Borough': gov_level=county, county_fips=02170 — manual override
+  [AK] 'North Pacific Fishery Management Council': gov_level=other, county_fips=None — manual override
+  [AK] 'Petersburg': gov_level=borough, county_fips=02195 — manual override
+  [AK] 'Sitka': gov_level=borough, county_fips=02220 — manual override
+  [AK] 'Valdez': gov_level=municipality, county_fips=02261 — manual override
+  [AZ] 'Lake Havasu': county_fips=04015 — manual override (special district/other)
+  [CA] 'Alameda-Contra Costa Transit District': county_fips=06001 — manual override (special district/other)
+  [CA] 'Judicial Council of California': gov_level=other, county_fips=None — manual override
+  [CA] 'Longbeach': county_fips=06037 — manual override (special district/other)
+  [CA] 'Los Angeles Workforce Development, Aging and Community Services': county_fips=06037 — manual override (special district/other)
+  [CA] 'Los Angeles-San Diego-San Luis Obispo Rail Corridor Agency': county_fips=06037 — manual override (special district/other)
+  [CA] 'Metro (Los Angeles)': county_fips=06037 — manual override (special district/other)
+  [CA] 'Metropolitan Transportation Commission': county_fips=06001 — manual override (special district/other)
+  [CA] 'Oakland Unified': county_fips=06001 — manual override (special district/other)
+  [CA] 'Orange County Sanitation District': county_fips=06059 — manual override (special district/other)
+  [CA] 'Orange County Transportation Authority': county_fips=06059 — manual override (special district/other)
+  [CA] 'Port of Oakland': county_fips=06001 — manual override (special district/other)
+  [CA] 'Port of San Diego': county_fips=06073 — manual override (special district/other)
+  [CA] "San Bernardino County Employees' Retirement Assoc.": county_fips=06071 — manual override (special district/other)
+  [CA] 'San Francisco Bay Area Rapid Transit District': county_fips=06001 — manual override (special district/other)
+  [CA] 'Santa Clara Valley Water District': county_fips=06085 — manual override (special district/other)
+  [CA] 'The Retirement Services Department City of San Jose': county_fips=06085 — manual override (special district/other)
+  [FL] 'Monroe County School District': county_fips=12087 — manual override (special district/other)
+  [FL] 'Northport': county_fips=12115 — manual override (special district/other)
+  [IL] 'Forest Preserves of Cook County': county_fips=17031 — manual override (special district/other)
+  [IL] 'Metropolitan Water Reclamation District of Greater Chicago': county_fips=17031 — manual override (special district/other)
+  [KY] 'Lexington-Fayette Urban County Government': county_fips=21067 — manual override (special district/other)
+  [ME] 'Windham': county_fips=23005 — manual override (special district/other)
+  [MI] 'Detroit Water and Sewage Department': county_fips=26163 — manual override (special district/other)
+  [MI] 'Great Lakes Water Authority': county_fips=26163 — manual override (special district/other)
+  [MN] 'Minnesota Public Uitlities Commission': county_fips=27123 — manual override (special district/other)
+  [NC] 'Eastern Band of the Cherokee Nation': county_fips=37099 — manual override (special district/other)
+  [NC] 'NC Capital Area Metropolitan Planning Organization': county_fips=37183 — manual override (special district/other)
+  [NM] 'Albuquerque Bernalillo County Water Utility Authority': county_fips=35001 — manual override (special district/other)
+  [OR] 'Metro (Oregon)': county_fips=41051 — manual override (special district/other)
+  [TX] 'Bouerne': county_fips=48259 — manual override (special district/other)
+  [TX] 'Edwards Aquifer Authority': county_fips=48029 — manual override (special district/other)
+  [TX] 'Pedernales Electric Cooperative': county_fips=48031 — manual override (special district/other)
+  [VA] 'Alexandria': gov_level=municipality, county_fips=51510 — manual override
+  [VA] 'Hampton': gov_level=municipality, county_fips=51650 — manual override
+  [VA] 'Harrisonburg': county_fips=51660 — manual override (independent city / consolidated / special)
+  [VA] 'Richmond': gov_level=municipality, county_fips=51760 — manual override
+  [WA] 'Whatcom': county_fips=53073 — manual override (special district/other)
+  [WI] 'Milwaukee Metropolitan Sewerage District': county_fips=55079 — manual override (special district/other)
+  [WI] 'Westallis': county_fips=55079 — manual override (special district/other)
+
+────────────────────────────────────────────────────────────
+NOT FOUND (county_fips could not be resolved)
+────────────────────────────────────────────────────────────
+  (none — all resolved)

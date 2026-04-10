@@ -1,0 +1,165 @@
+======================================================================
+AW_civic_scraper_sites — FIPS Population Notes (ALL rows)
+Generated 2026-03-25
+======================================================================
+
+WORKFLOW — AW_civic_scraper_sites (ALL rows, not just active)
+--------------------------------------------------------------
+1. Process ALL rows where state is a US state abbreviation (aw_active filter removed).
+2. state_fips: populated from a hardcoded state-abbreviation -> 2-digit FIPS map
+   (standard Census Bureau state FIPS codes).
+3. county_fips (stored as integer representing the full 5-digit FIPS, leading
+   zeros dropped):
+   a. If already populated, skip.
+   b. For gov_level = 'county': look up entity name against the Census
+      national_county.txt file (downloaded from census.gov). Strip common
+      suffixes ('County', 'Parish', 'Borough', 'Census Area') before matching.
+   c. For gov_level = 'municipality', 'other', or empty: look up place name
+      against the Census 2020 Place-County relationship file
+      (national_place_by_county2020.txt). When a place spans multiple
+      counties, the county with the largest intersection area is used.
+   d. Manual overrides are applied first for known edge cases (see below).
+
+DATA SOURCES
+  * State FIPS: hardcoded (Census standard)
+  * County FIPS: https://www2.census.gov/geo/docs/reference/codes/files/national_county.txt
+  * Place->County: https://www2.census.gov/geo/docs/reference/codes2020/national_place_by_county2020.txt
+
+
+TOTAL CELLS UPDATED: 743
+
+────────────────────────────────────────────────────────────
+EDGE CASES
+────────────────────────────────────────────────────────────
+  [ME] 'Windham': county_fips=23005 — manual override (special district/other)
+  [VA] 'Bristol': county_fips=51520 — manual override (independent city / consolidated / special)
+  [VA] 'Manassas': county_fips=51683 — manual override (independent city / consolidated / special)
+
+────────────────────────────────────────────────────────────
+NOT FOUND (county_fips could not be resolved)
+────────────────────────────────────────────────────────────
+  [AZ] 'Blackstone at Vistancia' (gov_level=other)
+  [AZ] 'Showlow' (gov_level=municipality)
+  [CA] 'Big Bear Lake Department of Water & Power' (gov_level=municipality)
+  [CA] 'Chino Basin Water District' (gov_level=other)
+  [CA] 'Concord Community Reuse Project' (gov_level=other)
+  [CA] 'Contra Costa Water District' (gov_level=other)
+  [CA] 'East Valley Water District' (gov_level=other)
+  [CA] 'Fountain Valley _x0003_Community Foundation' (gov_level=other)
+  [CA] 'Hayward Area Recreation and Park District' (gov_level=other)
+  [CA] 'Heartland Communications Facility Authority' (gov_level=other)
+  [CA] 'Ironhouse Sanitary District' (gov_level=other)
+  [CA] 'Municipal Management Association of Southern California' (gov_level=other)
+  [CA] 'Padre Dam Municipal Water District' (gov_level=other)
+  [CA] 'Palo Verde Health System' (gov_level=other)
+  [CA] 'Pasorobles' (gov_level=municipality)
+  [CA] 'Pleasant Hill Recreation & Park District' (gov_level=other)
+  [CA] 'Rancho Water District' (gov_level=other)
+  [CA] 'San Francisco Rec and Parks' (gov_level=other)
+  [CA] 'Santa Ynez Community Services District' (gov_level=other)
+  [CA] 'Southgate' (gov_level=municipality)
+  [CA] 'Sweetwater Authority' (gov_level=other)
+  [CA] 'Templeton Community Services District' (gov_level=other)
+  [CA] 'Western Riverside Council of Governments' (gov_level=other)
+  [CO] 'Cordillera Metro District' (gov_level=other)
+  [CO] 'El Paso Teller 911' (gov_level=other)
+  [CO] 'Frederick Firestone Fire Department' (gov_level=other)
+  [CO] 'Lake Dillon Fire Rescue' (gov_level=other)
+  [CO] 'Metro Mayors Caucus' (gov_level=other)
+  [CO] 'Pikes Peak Board of Cooperative Educational Services' (gov_level=other)
+  [CO] 'Red White & Blue Fire Protection District' (gov_level=other)
+  [CO] 'South Adams County Water & Sanitation District' (gov_level=other)
+  [CO] 'South Metro Fire Rescue Authority' (gov_level=other)
+  [CT] 'Enfield' (gov_level=municipality)
+  [FL] 'Maryesther' (gov_level=municipality)
+  [FL] 'Pembroke Pines Academic Village & High School' (gov_level=other)
+  [FL] 'Port of Palm Beach' (gov_level=other)
+  [FL] "Sun 'N Lake District" (gov_level=other)
+  [FL] 'Suwannee River Water Management District' (gov_level=other)
+  [FL] 'Zephyr Hills' (gov_level=municipality)
+  [GA] 'Classic Center' (gov_level=other)
+  [IA] 'Muscatine Convention and Visitors Bureau' (gov_level=other)
+  [IL] 'Cresthill' (gov_level=municipality)
+  [IL] 'McHenry Township Fire Protective District' (gov_level=other)
+  [IL] 'Roundlake Beach' (gov_level=municipality)
+  [IN] 'Fishers 2040' (gov_level=other)
+  [IN] 'State Road 37' (gov_level=other)
+  [IN] 'Stigma Free Fishers' (gov_level=other)
+  [KS] 'Belaire' (gov_level=municipality)
+  [KS] 'Eldorado' (gov_level=municipality)
+  [KS] 'El Dorado Chamber' (gov_level=other)
+  [KS] 'Garden City Rec Commission' (gov_level=other)
+  [KS] 'Kansas library' (gov_level=other)
+  [LA] 'Shreveport Airport' (gov_level=other)
+  [MA] 'Acton Senior Center' (gov_level=other)
+  [MA] 'Andover Public Schools' (gov_level=other)
+  [MA] 'Billerica' (gov_level=municipality)
+  [MA] 'Douglas' (gov_level=municipality)
+  [MA] 'Lowell HS Project' (gov_level=other)
+  [MA] 'Merrimac' (gov_level=municipality)
+  [MA] 'Shrewsbury' (gov_level=municipality)
+  [MA] 'Watertown' (gov_level=municipality)
+  [MA] 'Watertown Library' (gov_level=other)
+  [MA] 'Watertown Parks and Rec' (gov_level=other)
+  [MD] 'Maryland-National Capital Park and Planning Commission' (gov_level=municipality)
+  [ME] 'Greater Portland Metro' (gov_level=other)
+  [MI] 'Chesterfield Township' (gov_level=municipality)
+  [MI] 'Exeter' (gov_level=municipality)
+  [MI] 'Oceola township' (gov_level=municipality)
+  [MN] 'Invergrove Heights' (gov_level=municipality)
+  [MN] 'Whitebear township' (gov_level=municipality)
+  [MO] 'Belton Parks & Recreation' (gov_level=other)
+  [MO] 'Missouri City/County Management Association' (gov_level=other)
+  [MS] 'Mosspoint' (gov_level=municipality)
+  [MT] 'Billings Public Library' (gov_level=other)
+  [NC] 'Cape Fear Public Utility Authority' (gov_level=other)
+  [NC] 'Cabarrus Health Alliance' (gov_level=other)
+  [NJ] 'Parsippany-Troy Hills' (gov_level=municipality)
+  [NJ] 'Rivervale' (gov_level=municipality)
+  [NM] 'Espanola' (gov_level=municipality)
+  [NY] 'Easthampton Village' (gov_level=municipality)
+  [NY] 'Redhook' (gov_level=municipality)
+  [NY] 'Roosevelt Island Operating Corporation' (gov_level=other)
+  [OH] 'Groveport Recreation' (gov_level=other)
+  [OK] 'Claremore Industrial & Economic Development Authority' (gov_level=other)
+  [OR] 'Lane Council of Governments' (gov_level=other)
+  [OR] 'Lane Regional Air Protection Agency' (gov_level=other)
+  [PA] 'Association of Township Officials' (gov_level=other)
+  [PA] 'Collier Township' (gov_level=municipality)
+  [PA] 'East Hempfield Township' (gov_level=municipality)
+  [PA] 'East Town Township' (gov_level=municipality)
+  [PA] 'East Whiteland Township' (gov_level=municipality)
+  [PA] 'Lowerpotts Grove' (gov_level=other)
+  [PA] 'Mt. Lebanon Library' (gov_level=other)
+  [PA] 'North Strabane Township' (gov_level=municipality)
+  [PA] 'Radnor' (gov_level=municipality)
+  [PA] 'South Middleton Township' (gov_level=municipality)
+  [PA] 'Upper Frederick Township' (gov_level=municipality)
+  [PA] 'Uptmc' (gov_level=municipality)
+  [SC] 'Department of Insurance' (gov_level=other)
+  [TN] 'Berryhill' (gov_level=municipality)
+  [TN] 'Knoxville Area Transit' (gov_level=other)
+  [TN] 'Lavergne' (gov_level=municipality)
+  [TN] 'Oakhill' (gov_level=municipality)
+  [TN] 'Thompsons Station' (gov_level=municipality)
+  [TX] 'Alamo Area Development Corporation' (gov_level=other)
+  [TX] 'Big Spring Convention & Visitors Bureau Committee' (gov_level=other)
+  [TX] 'Concho Valley Workforce Development Board' (gov_level=other)
+  [TX] 'Decatur Economic Development Corporation' (gov_level=other)
+  [TX] 'Denison Development Alliance' (gov_level=other)
+  [TX] 'Ellago' (gov_level=municipality)
+  [TX] 'Flowermound' (gov_level=municipality)
+  [TX] 'Galveston Park Board of Trustees' (gov_level=other)
+  [TX] 'Gardenridge' (gov_level=municipality)
+  [TX] 'La Mesa' (gov_level=municipality)
+  [TX] 'Laporte' (gov_level=municipality)
+  [TX] 'Montbelvieu' (gov_level=municipality)
+  [TX] 'Port of Galveston' (gov_level=other)
+  [TX] 'The Colony Community Development Corporation' (gov_level=other)
+  [TX] 'Water Control and Improvement District' (gov_level=other)
+  [VT] 'Montpelier Alive' (gov_level=other)
+  [WA] 'Washington Association of County Officials' (gov_level=regional)
+  [WA] 'Evergreen State Fairgrounds' (gov_level=other)
+  [WA] 'Port of Port Angeles' (gov_level=other)
+  [WA] 'Washington State Parks' (gov_level=other)
+  [WV] 'Ranson' (gov_level=municipality)
