@@ -1,0 +1,33 @@
+{
+  "county_GOP_censures_of_R_officials": {
+    "pre_2020_baseline_per_year": 1.0,
+    "2021": 23,
+    "ratio": 23.0
+  },
+  "state_party_actions_2021_only": {
+    "formal_censures": 6,
+    "rebukes": 4,
+    "no_action": 7,
+    "denominator_jan6_impeach_voters": 17,
+    "share_with_formal_response": 0.5882352941176471,
+    "rnc_national_censures_2022": 2
+  },
+  "contested_R_House_primaries": {
+    "2018_baseline": 170.0,
+    "post_2020_avg": 214.33333333333334,
+    "pct_change": 26.078431372549026
+  },
+  "House_R_incumbents_defeated_in_primary": {
+    "pre_2020_avg_per_cycle": 3.6666666666666665,
+    "post_2020_avg_per_cycle": 5.666666666666667,
+    "ratio": 1.5454545454545456
+  },
+  "pct_all_House_incumbents_in_contested_primaries": {
+    "2014": 21.7,
+    "2016": 22.8,
+    "2018": 24.9,
+    "2020": 53.8,
+    "2022": 60.2,
+    "2024": 52.3
+  }
+}
